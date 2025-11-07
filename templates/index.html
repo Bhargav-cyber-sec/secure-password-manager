@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureVault - Password Manager</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+    <header class="app-header">
+        <h1>SecureVault</h1>
+        <p>Your Zero-Knowledge Password Manager</p>
+    </header>
+
+    <main class="app-container">
+
+        <div id="register-area" class="card">
+            <h2>Create Account</h2>
+            <input type="text" id="reg-username" placeholder="Username">
+            <input type="password" id="reg-password" placeholder="Master Password">
+            <button id="btn-register">Register</button>
+            <p class="toggle-link">Have an account? <a href="#" id="link-to-login">Login here</a></p>
+        </div>
+
+        <div id="login-area" class="card" style="display:none;">
+            <h2>Login</h2>
+            <input type="text" id="login-username" placeholder="Username">
+            <input type="password" id="login-password" placeholder="Master Password">
+            <button id="btn-login">Login</button>
+            <p class="toggle-link">No account? <a href="#" id="link-to-register">Register here</a></p>
+        </div>
+
+        <div id="mfa-login-area" class="card" style="display:none;">
+            <h2>MFA Required</h2>
+            <p>Enter the 6-digit code from your authenticator app.</p>
+            <input type="text" id="mfa-code" placeholder="123456" maxlength="6" inputmode="numeric">
+            <button id="btn-mfa-login">Verify Code</button>
+        </div>
+
+        <div id="mfa-enroll-area" class="card" style="display:none;">
+            <h2>Enable Multi-Factor Authentication</h2>
+            <p>Scan this QR code with your authenticator app (like Google Authenticator or Authy).</p>
+            <div id="qr-code-container">
+                <div id="qr-code"></div>
+            </div>
+            <p>After scanning, click Done. You will be asked for a code on your next login.</p>
+            <button id="btn-mfa-done" class="btn-secondary">Done</button>
+        </div>
+
+        <div id="vault-area" class="card" style="display:none;">
+            <div class="vault-header">
+                <h2>My Vault</h2>
+                <button id="btn-logout" class="btn-secondary">Logout</button>
+            </div>
+            <div class="vault-controls">
+                <button id="btn-setup-mfa" class="btn-secondary">Enable MFA</button>
+            </div>
+            <hr>
+            <p class="vault-note">Your vault is decrypted in your browser. Nothing unencrypted is sent to the server.</p>
+            <textarea id="vault-content" rows="15" placeholder="Your vault is empty. Try adding JSON data:
+{
+  &quot;website&quot;: &quot;google.com&quot;,
+  &quot;username&quot;: &quot;my-email@gmail.com&quot;,
+  &quot;password&quot;: &quot;my-secret-pass-123!&quot;
+}"></textarea>
+            <button id="btn-save-vault" class="btn-primary">Save Vault</button>
+        </div>
+
+        <div id="message-area" class="message-toast" style="display: none;"></div>
+
+    </main>
+    
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

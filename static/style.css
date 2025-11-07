@@ -1,0 +1,221 @@
+/* static/style.css */
+
+/* --- Root Variables (Theme) --- */
+:root {
+    --color-primary: #007bff;
+    --color-primary-dark: #0056b3;
+    --color-secondary: #6c757d;
+    --color-secondary-dark: #5a6268;
+    --color-success: #28a745;
+    --color-success-dark: #218838;
+    --color-danger: #dc3545;
+    --color-light: #f8f9fa;
+    --color-dark: #343a40;
+    --color-text: #212529;
+    --color-bg: #f0f2f5;
+    --border-color: #dee2e6;
+    --border-radius: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--color-dark);
+}
+.app-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+.app-header p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-secondary);
+}
+
+.app-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* --- Form Elements --- */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 5px 0;
+    border-radius: 6px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+button:active {
+    transform: scale(0.99);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+}
+#btn-save-vault {
+    background-color: var(--color-success);
+}
+#btn-save-vault:hover {
+    background-color: var(--color-success-dark);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: var(--color-secondary-dark);
+}
+
+/* --- Links --- */
+.toggle-link {
+    font-size: 0.9em;
+    text-align: center;
+    margin-top: 15px;
+}
+.toggle-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+.toggle-link a:hover {
+    text-decoration: underline;
+}
+
+/* --- Message Toast --- */
+#message-area {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    font-weight: 600;
+    z-index: 100;
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+}
+#message-area.success {
+    background-color: var(--color-success);
+    color: white;
+}
+#message-area.error {
+    background-color: var(--color-danger);
+    color: white;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+
+/* --- Vault & MFA Specifics --- */
+#qr-code-container {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    margin: 20px 0;
+    background-color: var(--color-light);
+}
+#qr-code img {
+    display: block;
+    border-radius: 4px;
+}
+
+.vault-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: -10px;
+}
+.vault-header h2 {
+    margin: 0;
+}
+.vault-header #btn-logout {
+    width: auto;
+    margin: 0;
+}
+.vault-controls {
+    margin-top: 10px;
+}
+.vault-controls #btn-setup-mfa {
+    width: auto;
+    margin: 0;
+}
+
+.vault-note {
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+    background-color: var(--color-light);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+textarea#vault-content {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.9rem;
+    padding: 10px;
+}
+textarea#vault-content:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+}
